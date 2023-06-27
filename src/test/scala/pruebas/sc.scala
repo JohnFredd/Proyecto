@@ -1,5 +1,0 @@
-package pruebas
-
-class sc {
-
-}

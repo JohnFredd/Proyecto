@@ -22,8 +22,8 @@ package object RiegoOptimo {
     val v = Vector.fill(long, long) {
       random.nextInt(long*3)+1
     }
-    (Vector tabulate(Long, Long))(
-      (i:Int, j:Int) => if (i<j) v(i)(j)
+    Vector.tabulate(long, long)(
+      (i, j) => if (i<j) v(i)(j)
       else if (i==j) 0
       else v(j)(i))
   }
@@ -38,6 +38,14 @@ package object RiegoOptimo {
 
   def prio(f: Finca, i: Int): Int = {
     f(i)._3
+  }
+
+  def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
+    def calcular(pi: ProgRiego, d: Distancia, u: Int): Vector[Int] = pi match {
+      case x +: xs => d(u)(x) +: calcular(xs, d, x)
+      case _ => Vector.empty
+    }
+    calcular(pi,d, pi(0)).foldLeft(0)((x,y) => x+y)
   }
 
 }

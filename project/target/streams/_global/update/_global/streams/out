@@ -1,3 +1,3 @@
-[debug] not up to date. inChanged = true, force = false
+[debug] not up to date. inChanged = false, force = false
 [debug] Updating ProjectRef(uri("file:/C:/Users/John/No%20documentos/Trabajos/PFU/Proyecto/project/"), "proyecto-build")...
 [debug] Done updating ProjectRef(uri("file:/C:/Users/John/No%20documentos/Trabajos/PFU/Proyecto/project/"), "proyecto-build")
