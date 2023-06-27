@@ -41,11 +41,11 @@ package object RiegoOptimo {
   }
 
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
-    def calcular(pi: ProgRiego, d: Distancia, u: Int): Vector[Int] = pi match {
-      case x +: xs => d(u)(x) +: calcular(xs, d, x)
+    def calcular(pi: ProgRiego): Vector[Int] = pi match {
+      case x +: y +: xs => d(x)(y) +: calcular(y +: xs)
       case _ => Vector.empty
     }
-    calcular(pi,d, pi(0)).foldLeft(0)((x,y) => x+y)
+    calcular(pi).foldLeft(0)((x,y) => x+y)
   }
 
 }
