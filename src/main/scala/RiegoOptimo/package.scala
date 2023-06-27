@@ -1,3 +1,7 @@
+import common.task
+
+import scala.collection.parallel.CollectionConverters._
+import scala.collection.parallel.immutable.ParVector
 import scala.util.Random
 
 package object RiegoOptimo {
@@ -61,8 +65,54 @@ package object RiegoOptimo {
     }
 
     val inicial = (0 until f.size).toVector
-    val resultado = aux(inicial)
-    resultado
+    aux(inicial)
+  }
+
+  def costoMovilidadPar(f: Finca, pi: ProgRiego, d: Distancia): Int = {
+    def calcular(pi: ProgRiego): Vector[Int] = pi match {
+      case x +: y +: xs => d(x)(y) +: calcular(y +: xs)
+      case _ => Vector.empty
+    }
+
+    val t = (pi.size + 3) / 4
+    val (p1, s1) = pi.splitAt(t)
+    val (p2, s2) = s1.splitAt(t)
+    val (p3, s3) = s2.splitAt(t)
+    val p4 = s3
+
+    val c1 = task(calcular(p1).foldLeft(0)((x, y) => x + y))
+    val c2 = task(calcular(p1.last +: p2).foldLeft(0)((x, y) => x + y))
+    val c3 = task(calcular(p2.last +: p3).foldLeft(0)((x, y) => x + y))
+    val c4 = calcular(p3.last +: p4).foldLeft(0)((x, y) => x + y)
+
+    c1.join() + c2.join() + c3.join() + c4
+  }
+
+  def generarProgramacionesRiegoPar(f: Finca): Vector[ProgRiego] = {
+    def aux(v: Vector[Int]): Vector[Vector[Int]] = {
+      if (v.isEmpty) {
+        Vector(Vector.empty)
+      } else {
+        v.flatMap { a =>
+          val subPermutaciones = aux(v.filter(_ != a))
+          subPermutaciones.map(a +: _)
+        }
+      }
+    }
+
+    def auxPar(v: Vector[Int]): Vector[Vector[Int]] = {
+      if (v.isEmpty) {
+        Vector(Vector.empty)
+      } else {
+        v.par.flatMap { a =>
+          val subPermutaciones = aux(v.filter(_ != a))
+          subPermutaciones.map(a +: _)
+        }.toVector
+      }
+    }
+
+    val inicial = (0 until f.size).toVector
+    auxPar(inicial)
   }
 
 }
