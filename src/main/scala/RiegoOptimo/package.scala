@@ -48,4 +48,21 @@ package object RiegoOptimo {
     calcular(pi).foldLeft(0)((x,y) => x+y)
   }
 
+  def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
+    def aux(v: Vector[Int]): Vector[Vector[Int]] = {
+      if (v.isEmpty) {
+        Vector(Vector.empty)
+      } else {
+        for {
+          a <- v
+          p <- aux(v.filter(_ != a))
+        } yield a +: p
+      }
+    }
+
+    val inicial = (0 until f.size).toVector
+    val resultado = aux(inicial)
+    resultado
+  }
+
 }
