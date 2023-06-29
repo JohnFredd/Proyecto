@@ -56,6 +56,10 @@ package object RiegoOptimo {
     tIRAux(0, Vector.fill(f.length)(0))
   }
 
+  def costoRiegoFinca(f : Finca, pi : ProgRiego) : Int = {
+    pi.foldLeft(0)((acc, numeroDeTablon) => 
+    acc + costoRiegoTablon(numeroDeTablon, f, pi))
+  }
 
   def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
     val tIRTablones = tIR(f, pi)
