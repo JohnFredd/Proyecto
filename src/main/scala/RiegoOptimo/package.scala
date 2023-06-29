@@ -43,6 +43,34 @@ package object RiegoOptimo {
   def prio(f: Finca, i: Int): Int = {
     f(i)._3
   }
+/*
+
+  def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
+    val tIRTablones = tIR(f, pi)
+    val tiempoSinAgua = tsup(f, i) - treg(f, i)
+
+    tiempoSinAgua match {
+      case x if x >= tIRTablones(i) =>
+        tsup(f, i) - (tIRTablones(i) + treg(f, i))
+      case _ =>
+        prio(f, i) * ((tIRTablones(i) + treg(f, i)) - tsup(f, i))
+    }
+  }
+
+  */
+
+  def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
+    val tIR = Vector (0, 3, 10, 12, 6)
+    val tIRTablones = tIR
+    val tiempoSinAgua = tsup(f, i) - treg(f, i)
+
+    tiempoSinAgua match {
+      case x if x >= tIRTablones(i) =>
+        tsup(f, i) - (tIRTablones(i) + treg(f, i))
+      case _ =>
+        prio(f, i) * ((tIRTablones(i) + treg(f, i)) - tsup(f, i))
+    }
+  }
 
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
     def calcular(pi: ProgRiego): Vector[Int] = pi match {
