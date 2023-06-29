@@ -1,10 +1,13 @@
 import RiegoOptimo._
 import org.scalameter.{Key, Warmer, config}
 
-val f = Vector((10, 3, 4), (5, 3, 3), (2, 2, 1), (8, 1, 1), (6, 4, 2))
-val pi = Vector(0, 1, 4, 2, 3)
-val resultado = costoRiegoFinca(f , pi )
+
+val f = Vector((4, 2, 1), (5, 3, 3))
+val d = Vector(Vector(0,3), Vector(3,0))
+
+val resultado = ProgramacionRiegoOptimo(f, d)
 println(resultado)
+
 
 val standardConfig = config (
   Key.exec.minWarmupRuns := 20,
