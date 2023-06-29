@@ -148,28 +148,37 @@ package object RiegoOptimo {
   }
 
   def ProgramacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int) = {
-    val todasLasProgramaciones = generarProgramacionesRiego(f)
+    val Programaciones = generarProgramacionesRiego(f)
 
-    val costoRiegoProgramaciones = todasLasProgramaciones.map(pi => costoRiegoFinca(f, pi))
-    val costoMovilidadProgramaciones = todasLasProgramaciones.map(pi => costoMovilidad(f, pi, d))
+    val costoRiegoProgramaciones = Programaciones.map(pi => costoRiegoFinca(f, pi))
+    val costoMovilidadProgramaciones = Programaciones.map(pi => costoMovilidad(f, pi, d))
 
     val costosTotales = costoRiegoProgramaciones.zip(costoMovilidadProgramaciones).map {
       case (costoRiego, costoMovilidad) => costoRiego + costoMovilidad
     }
 
     val indiceOptimo = costosTotales.indexOf(costosTotales.min)
-    val programacionOptima = todasLasProgramaciones(indiceOptimo)
+    val programacionOptima = Programaciones(indiceOptimo)
     val costoOptimo = costosTotales(indiceOptimo)
 
     (programacionOptima, costoOptimo)
   }
 
- /* def ProgramacionRiegoOptimoPar(f: Finca, d: Distancia): (ProgRiego, Int) = {
-    // Dada una finca devuelve la programacion de riego optima
-    // ...
+  def ProgramacionRiegoOptimoPar(f: Finca, d: Distancia): (ProgRiego, Int) = {
+    val Programaciones = generarProgramacionesRiegoPar(f)
+
+    val costoRiegoProgramaciones = Programaciones.par.map(pi => costoRiegoFincaPar(f, pi))
+    val costoMovilidadProgramaciones = Programaciones.par.map(pi => costoMovilidadPar(f, pi, d))
+
+    val costosTotales = costoRiegoProgramaciones.zip(costoMovilidadProgramaciones).map {
+      case (costoRiego, costoMovilidad) => costoRiego + costoMovilidad
+    }
+
+    val indiceOptimo = costosTotales.indexOf(costosTotales.min)
+    val programacionOptima = Programaciones(indiceOptimo)
+    val costoOptimo = costosTotales(indiceOptimo)
+
+    (programacionOptima, costoOptimo)
   }
-
-  */
-
 
 }

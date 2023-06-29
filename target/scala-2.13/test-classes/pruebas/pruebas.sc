@@ -1,14 +1,6 @@
 import RiegoOptimo._
 import org.scalameter.{Key, Warmer, config}
 
-
-val f = Vector((4, 2, 1), (5, 3, 3))
-val d = Vector(Vector(0,3), Vector(3,0))
-
-val resultado = ProgramacionRiegoOptimo(f, d)
-println(resultado)
-
-
 val standardConfig = config (
   Key.exec.minWarmupRuns := 20,
   Key.exec.maxWarmupRuns := 40,
@@ -16,7 +8,7 @@ val standardConfig = config (
   Key.verbose := false
 ) withWarmer (Warmer.Default())
 
-val finca = fincaAlAzar(3)
+val finca = fincaAlAzar(5)
 val distancia = distanciaAlAzar(5)
 val programacion = Vector(0,1,4,2,3)
 
@@ -67,7 +59,6 @@ costoRiegoFinca(finca, programacion)
 
 
 //costoMovilidadPar(finca, programacion, distancia)
-<<<<<<< HEAD
 /*
 costoMovilidad(finca, programacion, distancia)
 costoMovilidadPar(finca,programacion, distancia)
@@ -93,10 +84,6 @@ generarProgramacionesRiego(fincaAlAzar2)
 generarProgramacionesRiegoPar(fincaAlAzar2)
 
 
-=======
-generarProgramacionesRiego(finca)
-generarProgramacionesRiegoPar(finca)
->>>>>>> origin/main
 //standardConfig measure(generarProgramacionesRiego(finca))
 val standardConfig = config(
   Key.exec.minWarmupRuns := 20,
