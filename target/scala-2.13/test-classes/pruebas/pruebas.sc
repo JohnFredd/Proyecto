@@ -16,7 +16,7 @@ val standardConfig = config (
   Key.verbose := false
 ) withWarmer (Warmer.Default())
 
-val finca = fincaAlAzar(5)
+val finca = fincaAlAzar(3)
 val distancia = distanciaAlAzar(5)
 val programacion = Vector(0,1,4,2,3)
 
@@ -67,6 +67,7 @@ costoRiegoFinca(finca, programacion)
 
 
 //costoMovilidadPar(finca, programacion, distancia)
+<<<<<<< HEAD
 /*
 costoMovilidad(finca, programacion, distancia)
 costoMovilidadPar(finca,programacion, distancia)
@@ -92,6 +93,10 @@ generarProgramacionesRiego(fincaAlAzar2)
 generarProgramacionesRiegoPar(fincaAlAzar2)
 
 
+=======
+generarProgramacionesRiego(finca)
+generarProgramacionesRiegoPar(finca)
+>>>>>>> origin/main
 //standardConfig measure(generarProgramacionesRiego(finca))
 val standardConfig = config(
   Key.exec.minWarmupRuns := 20,

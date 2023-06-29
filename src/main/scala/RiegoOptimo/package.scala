@@ -91,7 +91,7 @@ package object RiegoOptimo {
       } else {
         for {
           a <- v
-          p <- aux(v.tail)
+          p <- aux(v.filter(_ != a))
         } yield a +: p
       }
     }
@@ -126,7 +126,7 @@ package object RiegoOptimo {
         Vector(Vector.empty)
       } else {
         v.flatMap { a =>
-          val subPermutaciones = aux(v.tail)
+          val subPermutaciones = aux(v.filter(_ != a))
           subPermutaciones.map(a +: _)
         }
       }
@@ -137,7 +137,7 @@ package object RiegoOptimo {
         Vector(Vector.empty)
       } else {
         v.par.flatMap { a =>
-          val subPermutaciones = aux(v.tail)
+          val subPermutaciones = aux(v.filter(_ != a))
           subPermutaciones.map(a +: _)
         }.toVector
       }
