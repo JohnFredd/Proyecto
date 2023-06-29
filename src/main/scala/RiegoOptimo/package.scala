@@ -1,5 +1,6 @@
 import common.task
 
+import scala.annotation.tailrec
 import scala.collection.parallel.CollectionConverters._
 import scala.collection.parallel.immutable.ParVector
 import scala.util.Random
@@ -45,6 +46,7 @@ package object RiegoOptimo {
   }
 
   def tIR(f: Finca, pi: ProgRiego): TiempoInicioRiego = {
+    @tailrec
     def tIRAux(j: Int, acc: Vector[Int]): Vector[Int] = {
       if (j >= f.length) acc
       else {
