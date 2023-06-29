@@ -100,6 +100,10 @@ package object RiegoOptimo {
     aux(inicial)
   }
 
+  def costoRiegoFincaPar(f: Finca, pi: ProgRiego): Int = {
+    pi.par.foldLeft(0)((acc, numeroDeTablon) => acc + costoRiegoTablon(numeroDeTablon, f, pi))
+  }
+
   def costoMovilidadPar(f: Finca, pi: ProgRiego, d: Distancia): Int = {
     def calcular(pi: ProgRiego): Vector[Int] = pi match {
       case x +: y +: xs => d(x)(y) +: calcular(y +: xs)
