@@ -38,11 +38,11 @@ val finca: Finca = Vector(
 
 
 val distancia: Distancia = Vector(
-  Vector(0, 4, 4, 2, 2),
-  Vector(4, 0, 2, 4, 8),
-  Vector(4, 2, 0, 4, 4),
-  Vector(2, 4, 4, 0, 2),
-  Vector(2, 8, 4, 2, 0)
+  Vector(0, 2, 2, 4, 4),
+  Vector(2, 0, 4, 2, 6),
+  Vector(2, 4, 0, 2, 2),
+  Vector(4, 2, 2, 0, 4),
+  Vector(4, 6, 2, 4, 0)
 )
 
 
