@@ -44,6 +44,20 @@ package object RiegoOptimo {
     f(i)._3
   }
 
+
+  def tIR(f: Finca, pi: ProgRiego): TiempoInicioRiego = {
+    def tIRAux(j: Int, acc: Vector[Int]): Vector[Int] = {
+      if (j >= f.length) acc
+      else {
+        val tIRj = if (j == 0) 0 else acc(pi(j - 1)) + tReg(f, pi(j - 1))
+        tIRAux(j + 1, acc.updated(pi(j), tIRj))
+      }
+    }
+
+    tIRAux(0, Vector.fill(f.length)(0))
+  }
+
+
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
     def calcular(pi: ProgRiego): Vector[Int] = pi match {
       case x +: y +: xs => d(x)(y) +: calcular(y +: xs)
